@@ -99,7 +99,9 @@ class AddBook extends React.Component {
           </select>
         </div>
 
-        <button>+</button>
+        <button>
+          <p>+</p>
+        </button>
       </form>
     );
   }
