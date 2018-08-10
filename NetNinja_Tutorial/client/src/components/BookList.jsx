@@ -8,6 +8,10 @@ import BookDetails from "./BookDetails";
 class BookList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      bookId: null
+    };
   }
 
   displayBooks() {
@@ -17,7 +21,16 @@ class BookList extends React.Component {
       return <div>Loading books...</div>;
     } else {
       return data.books.map(book => {
-        return <li key={book.id}>{book.name}</li>;
+        return (
+          <li
+            key={book.id}
+            onClick={e => {
+              this.setState({ bookId: book.id });
+            }}
+          >
+            {book.name}
+          </li>
+        );
       });
     }
   }
@@ -27,7 +40,7 @@ class BookList extends React.Component {
       <div>
         <ul id="book-list">{this.displayBooks()}</ul>
 
-        <BookDetails />
+        <BookDetails bookId={this.state.bookId} />
       </div>
     );
   }
