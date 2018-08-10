@@ -1,7 +1,11 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
 
-import { getAuthorsQuery, addBookMutation } from "../queries/queries";
+import {
+  getBooksQuery,
+  getAuthorsQuery,
+  addBookMutation
+} from "../queries/queries";
 
 class AddBook extends React.Component {
   constructor(props) {
@@ -25,13 +29,27 @@ class AddBook extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addBookMutation({
-      variables: {
-        name: this.state.bookName,
-        genre: this.state.genre,
-        authorId: this.state.authorId
-      }
-    });
+
+    this.props
+      .addBookMutation({
+        variables: {
+          name: this.state.bookName,
+          genre: this.state.genre,
+          authorId: this.state.authorId
+        },
+        refetchQueries: [
+          {
+            query: getBooksQuery
+          }
+        ]
+      })
+      .then(() => {
+        this.setState({
+          bookName: "",
+          genre: "",
+          authorId: "5b6a666c1cc787bbaf6fddf0"
+        });
+      });
   }
 
   displayAuthors() {
@@ -55,17 +73,28 @@ class AddBook extends React.Component {
       <form id="add-book" onSubmit={this.handleSubmit}>
         <div className="field">
           <label>Book name:</label>
-          <input type="text" onChange={this.handleChange("bookName")} />
+          <input
+            type="text"
+            onChange={this.handleChange("bookName")}
+            value={this.state.bookName}
+          />
         </div>
 
         <div className="field">
           <label>Genre:</label>
-          <input type="text" onChange={this.handleChange("genre")} />
+          <input
+            type="text"
+            onChange={this.handleChange("genre")}
+            value={this.state.genre}
+          />
         </div>
 
         <div className="field">
           <label>Author:</label>
-          <select onChange={this.handleChange("authorId")}>
+          <select
+            onChange={this.handleChange("authorId")}
+            value={this.state.authorId}
+          >
             {this.displayAuthors()}
           </select>
         </div>
