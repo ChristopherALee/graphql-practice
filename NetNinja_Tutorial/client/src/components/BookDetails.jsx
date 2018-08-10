@@ -35,6 +35,7 @@ class BookDetails extends React.Component {
   }
 }
 
+// when props are passed on to BookDetails component, getBookQuery is then ran with those props so the data is populated in the component
 export default graphql(getBookQuery, {
   options: props => {
     return {
