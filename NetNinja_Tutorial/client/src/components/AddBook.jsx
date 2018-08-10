@@ -10,7 +10,7 @@ class AddBook extends React.Component {
     this.state = {
       bookName: "",
       genre: "",
-      author: "5b6a666c1cc787bbaf6fddf0"
+      authorId: "5b6a666c1cc787bbaf6fddf0"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +25,13 @@ class AddBook extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    this.props.addBookMutation({
+      variables: {
+        name: this.state.bookName,
+        genre: this.state.genre,
+        authorId: this.state.authorId
+      }
+    });
   }
 
   displayAuthors() {
@@ -59,7 +65,7 @@ class AddBook extends React.Component {
 
         <div className="field">
           <label>Author:</label>
-          <select onChange={this.handleChange("author")}>
+          <select onChange={this.handleChange("authorId")}>
             {this.displayAuthors()}
           </select>
         </div>
