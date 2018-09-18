@@ -3,6 +3,7 @@ const _ = require("lodash");
 
 const Book = require("../models/book");
 const Car = require("../models/car");
+const Game = require("../models/game");
 
 const {
   GraphQLObjectType,
@@ -60,6 +61,19 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CarType),
       resolve(parent, args) {
         return Car.find({});
+      }
+    },
+    game: {
+      type: GameType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Game.findById(args.id);
+      }
+    },
+    games: {
+      type: new GraphQLList(CarType),
+      resolve(parent, args) {
+        return Game.find({});
       }
     }
   }
