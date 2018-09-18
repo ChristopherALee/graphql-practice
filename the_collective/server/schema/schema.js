@@ -34,6 +34,17 @@ const CarType = new GraphQLObjectType({
   })
 });
 
+const GameType = new GraphQLObjectType({
+  name: "Game",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    genre: { type: GraphQLString },
+    platform: { type: GraphQLString },
+    numOfPlayers: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
