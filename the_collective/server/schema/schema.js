@@ -2,6 +2,7 @@ const graphql = require("graphql");
 const _ = require("lodash");
 
 const Book = require("../models/book");
+const Car = require("../models/car");
 
 const {
   GraphQLObjectType,
@@ -23,6 +24,15 @@ const BookType = new GraphQLObjectType({
   })
 });
 
+const CarType = new GraphQLObjectType({
+  name: "Car",
+  fields: () => ({
+    id: { type: GraphQLID },
+    make: { type: GraphQLString },
+    model: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -37,6 +47,19 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       resolve(parent, args) {
         return Book.find({});
+      }
+    },
+    car: {
+      type: CarType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Car.findById(args.id);
+      }
+    },
+    cars: {
+      type: new GraphQLList(CarType),
+      resolve(parent, args) {
+        return Car.find({});
       }
     }
   }
