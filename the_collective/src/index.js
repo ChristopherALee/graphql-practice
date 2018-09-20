@@ -4,5 +4,11 @@ import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
-registerServiceWorker();
+import configureStore from "./store/store";
+
+document.addEventListener("DOMContentLoaded", () => {
+  let store = configureStore();
+
+  ReactDOM.render(<App store={store} />, document.getElementById("root"));
+  registerServiceWorker();
+});
