@@ -1,0 +1,13 @@
+#main-nav {
+  display: flex;
+}
+
+#main-nav h2 {
+  display: flex;
+  justify-content: center;
+  background-color: lightgrey;
+  padding: 10px;
+  width: 20%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}

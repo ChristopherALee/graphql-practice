@@ -6,7 +6,7 @@ import { ApolloProvider } from "react-apollo";
 import "./index.css";
 
 // components
-import MainPage from "./components/MainPage";
+import MainPage from "./components/mainPage/mainPage";
 
 // apollo client setup
 const client = new ApolloClient({
@@ -24,7 +24,6 @@ class App extends Component {
         <HashRouter>
           <ApolloProvider client={client}>
             <div id="main">
-              <h1>The Collective</h1>
               <MainPage />
             </div>
           </ApolloProvider>

@@ -1,4 +1,5 @@
 import React from "react";
+import "./navbar.css";
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class NavBar extends React.Component {
 
   render() {
     return (
-      <nav>
+      <nav id="main-nav">
         <h2>Books</h2>
         <h2>Cars</h2>
         <h2>Games</h2>
