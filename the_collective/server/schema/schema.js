@@ -5,6 +5,7 @@ const Book = require("../models/book");
 const Car = require("../models/car");
 const Game = require("../models/game");
 const Gundam = require("../models/gundam");
+const Movie = require("../models/movie");
 
 const {
   GraphQLObjectType,
@@ -53,6 +54,15 @@ const GundamType = new GraphQLObjectType({
     name: { type: GraphQLString },
     grade: { type: GraphQLString },
     series: { type: GraphQLString }
+  })
+});
+
+const MovieType = new GraphQLObjectType({
+  name: "Movie",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    genre: { type: GraphQLString }
   })
 });
 
@@ -109,6 +119,19 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(GundamType),
       resolve(parent, args) {
         return Gundam.find({});
+      }
+    },
+    movie: {
+      type: MovieType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Movie.findById(args.id);
+      }
+    },
+    movies: {
+      type: new GraphQLList(MovieType),
+      resolve(parent, args) {
+        return Movie.find({});
       }
     }
   }
