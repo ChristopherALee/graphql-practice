@@ -9,11 +9,21 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <nav id="main-nav">
-        <h2>Books</h2>
-        <h2>Cars</h2>
-        <h2>Games</h2>
-        <h2>Gundam</h2>
-        <h2>Movies</h2>
+        <h2>
+          <p>Books</p>
+        </h2>
+        <h2>
+          <p>Cars</p>
+        </h2>
+        <h2>
+          <p>Games</p>
+        </h2>
+        <h2>
+          <p>Gundam</p>
+        </h2>
+        <h2>
+          <p>Movies</p>
+        </h2>
       </nav>
     );
   }

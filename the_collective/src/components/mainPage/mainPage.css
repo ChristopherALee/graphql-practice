@@ -3,6 +3,11 @@
 }
 
 #header h1 {
-  padding: 5px;
+  padding: 20px 0 10px 20px;
   font-size: 30px;
+}
+
+#header p {
+  padding: 5px 0 5px 50px;
+  font-style: italic;
 }
