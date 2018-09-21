@@ -7,6 +7,10 @@
   font-size: 30px;
 }
 
+#header h1:hover {
+  cursor: pointer;
+}
+
 #header p {
   padding: 5px 0 5px 50px;
   font-style: italic;

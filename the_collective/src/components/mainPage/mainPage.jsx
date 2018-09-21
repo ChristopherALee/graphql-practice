@@ -8,13 +8,21 @@ import NavBar from "../navbar/navBar";
 export default class MainPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.redirectHome = this.redirectHome.bind(this);
+  }
+
+  redirectHome() {
+    if (this.props.location.pathname !== "/") {
+      this.props.history.push("/");
+    }
   }
 
   render() {
     return (
       <main id="main-component">
         <section id="header">
-          <h1>The Collective</h1>
+          <h1 onClick={this.redirectHome}>The Collective</h1>
           <p>"For the culture" - Migos</p>
         </section>
 

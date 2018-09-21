@@ -5,16 +5,15 @@
 #main-nav h2 {
   display: flex;
   justify-content: center;
-  /* background-color: lightgrey; */
-  /* padding: 10px; */
   width: 20%;
-  /* border-top-left-radius: 25px;
-  border-top-right-radius: 25px; */
-
   border-bottom: 50px solid lightgrey;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   height: 0;
+}
+
+#main-nav h2:hover {
+  cursor: pointer;
 }
 
 #main-nav h2:nth-child(2) {

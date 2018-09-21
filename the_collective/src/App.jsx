@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { HashRouter } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import "./index.css";
@@ -24,7 +24,7 @@ class App extends Component {
         <HashRouter>
           <ApolloProvider client={client}>
             <div id="main">
-              <MainPage />
+              <Route path="/" component={MainPage} />
             </div>
           </ApolloProvider>
         </HashRouter>
