@@ -3,9 +3,7 @@ import { graphql, compose } from "react-apollo";
 
 import { getBooksQuery, addBookMutation } from "../../../queries/queries";
 
-import AddBook from "./addBook";
-
-class BookList extends React.Component {
+class AddBook extends React.Component {
   constructor(props) {
     super(props);
 
@@ -50,39 +48,40 @@ class BookList extends React.Component {
       });
   }
 
-  displayBooks() {
-    let data = this.props.data;
-
-    if (data.loading) {
-      return <div>Loading books...</div>;
-    } else {
-      return data.books.map(book => {
-        return (
-          <div key={book.id}>
-            <p>{book.name}</p>
-            <p>{book.author}</p>
-            <p>{book.genre}</p>
-          </div>
-        );
-      });
-    }
-  }
-
   render() {
     return (
-      <div>
-        <section id="column-headers">
-          <h3>Name</h3>
-          <h3>Genre</h3>
-          <h3>Author</h3>
-        </section>
+      <form id="add-book" onSubmit={this.handleSubmit}>
+        <div className="field">
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange("name")}
+          />
+        </div>
 
-        <ul id="book-list">{this.displayBooks()}</ul>
+        <div className="field">
+          <input
+            type="text"
+            value={this.state.genre}
+            onChange={this.handleChange("genre")}
+          />
+        </div>
 
-        <AddBook />
-      </div>
+        <div className="field">
+          <input
+            type="text"
+            value={this.state.author}
+            onChange={this.handleChange("author")}
+          />
+        </div>
+
+        <input type="submit" value="Submit" />
+      </form>
     );
   }
 }
 
-export default graphql(getBooksQuery)(BookList);
+export default compose(
+  graphql(getBooksQuery, { name: "getBooksQuery" }),
+  graphql(addBookMutation, { name: "addBookMutation" })
+)(AddBook);
