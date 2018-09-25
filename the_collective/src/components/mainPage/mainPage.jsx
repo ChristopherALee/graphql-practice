@@ -4,6 +4,7 @@ import "./mainPage.css";
 
 // imported components
 import NavBar from "../navbar/navBar";
+import BookList from "../collections/books/bookList";
 
 export default class MainPage extends React.Component {
   constructor(props) {
@@ -27,6 +28,10 @@ export default class MainPage extends React.Component {
         </section>
 
         <Route path="/" component={NavBar} />
+
+        <Switch>
+          <Route path="/books" component={BookList} />
+        </Switch>
       </main>
     );
   }
