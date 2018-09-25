@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
+import "./addBook.css";
 
 import { getBooksQuery, addBookMutation } from "../../../../queries/queries";
 
@@ -50,33 +51,36 @@ class AddBook extends React.Component {
 
   render() {
     return (
-      <form id="add-book" onSubmit={this.handleSubmit}>
-        <div className="field">
+      <tr id="add-book-container">
+        <input type="submit" value="Submit" onClick={this.handleSubmit} />
+
+        <td className="field">
           <input
             type="text"
             value={this.state.name}
             onChange={this.handleChange("name")}
+            placeholder="Add Name..."
           />
-        </div>
+        </td>
 
-        <div className="field">
-          <input
-            type="text"
-            value={this.state.genre}
-            onChange={this.handleChange("genre")}
-          />
-        </div>
-
-        <div className="field">
+        <td className="field">
           <input
             type="text"
             value={this.state.author}
             onChange={this.handleChange("author")}
+            placeholder="Add Author..."
           />
-        </div>
+        </td>
 
-        <input type="submit" value="Submit" />
-      </form>
+        <td className="field">
+          <input
+            type="text"
+            value={this.state.genre}
+            onChange={this.handleChange("genre")}
+            placeholder="Add Genre..."
+          />
+        </td>
+      </tr>
     );
   }
 }

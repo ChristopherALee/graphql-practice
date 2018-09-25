@@ -13,10 +13,12 @@ td {
 th {
   padding: 10px;
   font-weight: bold;
+  width: 25%;
 }
 
 td {
   padding: 5px;
+  width: 25%;
 }
 
 #displayed-books {

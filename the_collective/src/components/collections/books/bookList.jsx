@@ -23,9 +23,10 @@ class BookList extends React.Component {
     if (data.loading) {
       return <div>Loading books...</div>;
     } else {
-      return data.books.map(book => {
+      return data.books.map((book, idx) => {
         return (
           <tr id="book-item" key={book.id}>
+            <td>{idx + 1}</td>
             <td>{book.name}</td>
             <td>{book.author}</td>
             <td>{book.genre}</td>
@@ -39,13 +40,13 @@ class BookList extends React.Component {
     return (
       <div id="book-list">
         <table id="displayed-books">
+          <th />
           <th>Name</th>
           <th>Author</th>
           <th>Genre</th>
           {this.displayBooks()}
+          <AddBook />
         </table>
-
-        <AddBook />
       </div>
     );
   }
