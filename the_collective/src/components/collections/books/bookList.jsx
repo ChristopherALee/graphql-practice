@@ -1,9 +1,10 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
+import "./bookList.css";
 
-import { getBooksQuery, addBookMutation } from "../../../queries/queries";
+import { getBooksQuery } from "../../../queries/queries";
 
-import AddBook from "./addBook";
+import AddBook from "./addBook/addBook";
 
 class BookList extends React.Component {
   constructor(props) {
@@ -14,40 +15,6 @@ class BookList extends React.Component {
       genre: "",
       author: ""
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(field) {
-    return e => {
-      this.setState({ [field]: e.target.value });
-    };
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-
-    this.props
-      .addBookMutation({
-        variables: {
-          name: this.state.name,
-          genre: this.state.genre,
-          author: this.state.author
-        },
-        refetchQueries: [
-          {
-            query: getBooksQuery
-          }
-        ]
-      })
-      .then(() => {
-        this.setState({
-          name: "",
-          genre: "",
-          author: ""
-        });
-      });
   }
 
   displayBooks() {
@@ -58,11 +25,11 @@ class BookList extends React.Component {
     } else {
       return data.books.map(book => {
         return (
-          <div key={book.id}>
-            <p>{book.name}</p>
-            <p>{book.author}</p>
-            <p>{book.genre}</p>
-          </div>
+          <tr id="book-item" key={book.id}>
+            <td>{book.name}</td>
+            <td>{book.author}</td>
+            <td>{book.genre}</td>
+          </tr>
         );
       });
     }
@@ -70,14 +37,13 @@ class BookList extends React.Component {
 
   render() {
     return (
-      <div>
-        <section id="column-headers">
-          <h3>Name</h3>
-          <h3>Genre</h3>
-          <h3>Author</h3>
-        </section>
-
-        <ul id="book-list">{this.displayBooks()}</ul>
+      <div id="book-list">
+        <table id="displayed-books">
+          <th>Name</th>
+          <th>Author</th>
+          <th>Genre</th>
+          {this.displayBooks()}
+        </table>
 
         <AddBook />
       </div>

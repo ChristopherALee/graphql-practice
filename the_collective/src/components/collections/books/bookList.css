@@ -1,0 +1,28 @@
+#book-list {
+  margin: 0 10px 10px 10px;
+  padding: 10px;
+  background-color: whitesmoke;
+}
+
+table,
+th,
+td {
+  border: 1px solid grey;
+}
+
+th {
+  padding: 10px;
+  font-weight: bold;
+}
+
+td {
+  padding: 5px;
+}
+
+#displayed-books {
+  width: 100%;
+}
+
+#book-item p {
+  width: 33.3%;
+}
