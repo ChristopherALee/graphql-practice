@@ -9,12 +9,6 @@ import AddBook from "./addBook/addBook";
 class BookList extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      name: "",
-      genre: "",
-      author: ""
-    };
   }
 
   displayBooks() {

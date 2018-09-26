@@ -1,0 +1,9 @@
+#car-list {
+  margin: 0 10px 10px 10px;
+  padding: 10px;
+  background-color: whitesmoke;
+}
+
+#displayed-cars {
+  width: 100%;
+}
