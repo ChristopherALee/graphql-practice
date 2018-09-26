@@ -6,6 +6,7 @@ export default class NavBar extends React.Component {
     super(props);
 
     this.redirectTo = this.redirectTo.bind(this);
+    this.isActiveTab = this.isActiveTab.bind(this);
   }
 
   redirectTo(section) {
@@ -16,22 +17,45 @@ export default class NavBar extends React.Component {
     };
   }
 
+  isActiveTab(category) {
+    if (category === this.props.location.pathname.slice(1)) {
+      return "active-cat";
+    } else {
+      return "inactive-cat";
+    }
+  }
+
   render() {
     return (
       <nav id="main-nav">
-        <h2 onClick={this.redirectTo("/books")}>
+        <h2
+          className={this.isActiveTab("books")}
+          onClick={this.redirectTo("/books")}
+        >
           <p>Books</p>
         </h2>
-        <h2 onClick={this.redirectTo("/cars")}>
+        <h2
+          className={this.isActiveTab("cars")}
+          onClick={this.redirectTo("/cars")}
+        >
           <p>Cars</p>
         </h2>
-        <h2 onClick={this.redirectTo("/games")}>
+        <h2
+          className={this.isActiveTab("games")}
+          onClick={this.redirectTo("/games")}
+        >
           <p>Games</p>
         </h2>
-        <h2 onClick={this.redirectTo("/gundam")}>
+        <h2
+          className={this.isActiveTab("gundam")}
+          onClick={this.redirectTo("/gundam")}
+        >
           <p>Gundam</p>
         </h2>
-        <h2 onClick={this.redirectTo("/movies")}>
+        <h2
+          className={this.isActiveTab("movies")}
+          onClick={this.redirectTo("/movies")}
+        >
           <p>Movies</p>
         </h2>
       </nav>

@@ -7,10 +7,18 @@
   display: flex;
   justify-content: center;
   width: 20%;
-  border-bottom: 50px solid lightgrey;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   height: 0;
+}
+
+.active-cat {
+  border-bottom: 50px solid white;
+  z-index: 1;
+}
+
+.inactive-cat {
+  border-bottom: 50px solid lightgrey;
 }
 
 #main-nav h2:hover {
