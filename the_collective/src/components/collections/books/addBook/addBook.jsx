@@ -16,6 +16,8 @@ class AddBook extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.renderSubmitButton = this.renderSubmitButton.bind(this);
   }
 
   handleChange(field) {
@@ -49,10 +51,30 @@ class AddBook extends React.Component {
       });
   }
 
+  renderSubmitButton() {
+    if (
+      this.state.name.length > 0 &&
+      this.state.genre.length > 0 &&
+      this.state.author.length > 0
+    ) {
+      return (
+        <td id="submit-button" className="active" onClick={this.handleSubmit}>
+          +
+        </td>
+      );
+    } else {
+      return (
+        <td id="submit-button" className="inactive">
+          +
+        </td>
+      );
+    }
+  }
+
   render() {
     return (
       <tr id="add-book-container">
-        <input type="submit" value="Submit" onClick={this.handleSubmit} />
+        {this.renderSubmitButton()}
 
         <td className="field">
           <input

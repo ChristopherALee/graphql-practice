@@ -1,0 +1,28 @@
+#submit-button {
+  text-align: center;
+  font-size: 20px;
+}
+
+.inactive {
+  background-color: lightgrey;
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: rgba(88, 224, 88);
+}
+.active:hover {
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  font-size: 15px;
+  background-color: rgb(88, 224, 88);
+  border: 0;
+}
+
+input[type="text"] {
+  background: transparent;
+  border: 0;
+  outline: none;
+}
