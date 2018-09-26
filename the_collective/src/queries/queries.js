@@ -22,4 +22,24 @@ const addBookMutation = gql`
   }
 `;
 
-export { getBooksQuery, addBookMutation };
+const getCarsQuery = gql`
+  {
+    cars {
+      make
+      model
+      id
+    }
+  }
+`;
+
+const addCarMutation = gql`
+  mutation($make: String!, $model: String!) {
+    addCar(make: $make, model: $model) {
+      make
+      model
+      id
+    }
+  }
+`;
+
+export { getBooksQuery, addBookMutation, getCarsQuery, addCarMutation };
