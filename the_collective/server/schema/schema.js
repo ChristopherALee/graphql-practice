@@ -156,6 +156,21 @@ const Mutation = new GraphQLObjectType({
 
         return book.save();
       }
+    },
+    addCar: {
+      type: CarType,
+      args: {
+        make: { type: new GraphQLNonNull(GraphQLString) },
+        model: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        let car = new Car({
+          make: args.make,
+          model: args.model
+        });
+
+        return car.save();
+      }
     }
   }
 });

@@ -13,6 +13,7 @@
 }
 .active:hover {
   cursor: pointer;
+  background-color: rgb(104, 255, 104);
 }
 
 input[type="submit"] {
