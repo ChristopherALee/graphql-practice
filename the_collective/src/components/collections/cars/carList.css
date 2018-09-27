@@ -11,3 +11,33 @@
 #row-number {
   text-align: center;
 }
+
+#delete-mode-toggle-container {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#delete-mode-toggle {
+  color: white;
+  border: none;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+}
+
+.delete-mode-active {
+  background-color: grey;
+}
+
+.delete-mode-active:hover {
+  background-color: lightgrey;
+}
+
+.delete-mode-inactive {
+  background-color: rgb(236, 68, 68);
+}
+
+.delete-mode-inactive:hover {
+  background-color: rgb(255, 94, 94);
+}

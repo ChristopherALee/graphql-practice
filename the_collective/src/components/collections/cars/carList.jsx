@@ -30,6 +30,30 @@ class CarList extends React.Component {
     }
   }
 
+  toggleDeleteButton() {
+    if (this.state.deleteMode) {
+      return (
+        <button
+          id="delete-mode-toggle"
+          className="delete-mode-active"
+          onClick={this.toggleDeleteMode}
+        >
+          Cancel
+        </button>
+      );
+    } else {
+      return (
+        <button
+          id="delete-mode-toggle"
+          className="delete-mode-inactive"
+          onClick={this.toggleDeleteMode}
+        >
+          Edit
+        </button>
+      );
+    }
+  }
+
   deleteCar(id) {
     return e =>
       this.props.deleteCarMutation({
@@ -79,7 +103,11 @@ class CarList extends React.Component {
   render() {
     return (
       <div id="car-list">
-        <button onClick={this.toggleDeleteMode}>Edit</button>
+        <div id="delete-mode-toggle-container">
+          <button id="delete-mode-toggle" onClick={this.toggleDeleteMode}>
+            {this.toggleDeleteButton()}
+          </button>
+        </div>
 
         <table id="displayed-cars">
           <th id="cell-filler" />
