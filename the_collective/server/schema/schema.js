@@ -171,6 +171,15 @@ const Mutation = new GraphQLObjectType({
 
         return car.save();
       }
+    },
+    deleteCar: {
+      type: CarType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        return Car.delete(args.id);
+      }
     }
   }
 });
