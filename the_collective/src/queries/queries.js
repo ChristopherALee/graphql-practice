@@ -52,4 +52,10 @@ const deleteCarMutation = gql`
   }
 `;
 
-export { getBooksQuery, addBookMutation, getCarsQuery, addCarMutation };
+export {
+  getBooksQuery,
+  addBookMutation,
+  getCarsQuery,
+  addCarMutation,
+  deleteCarMutation
+};

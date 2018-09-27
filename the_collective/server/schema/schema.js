@@ -178,7 +178,9 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parent, args) {
-        return Car.delete(args.id);
+        let car = Car.findById(args.id);
+
+        return car.remove();
       }
     }
   }
