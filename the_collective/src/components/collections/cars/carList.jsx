@@ -4,6 +4,8 @@ import "./carList.css";
 import { getCarsQuery } from "../../../queries/queries";
 import { graphql } from "react-apollo";
 
+import AddCar from "./addCar/addCar";
+
 class CarList extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +37,7 @@ class CarList extends React.Component {
           <th>Make</th>
           <th>Model</th>
           {this.displayCars()}
+          <AddCar />
         </table>
       </div>
     );
