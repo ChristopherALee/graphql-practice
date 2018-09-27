@@ -41,3 +41,26 @@
 .delete-mode-inactive:hover {
   background-color: rgb(255, 94, 94);
 }
+
+#delete-button {
+  display: flex;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+#delete-button div {
+  padding: 2px 8px;
+  border-radius: 50%;
+  color: white;
+  background-color: rgb(236, 68, 68);
+  font-size: 18px;
+}
+
+#delete-button div:hover {
+  background-color: rgb(255, 94, 94);
+}
+
+#cell-filler {
+  width: 25px;
+}

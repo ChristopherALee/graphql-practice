@@ -79,7 +79,7 @@ class CarList extends React.Component {
           return (
             <tr id="car-item" key={car.id}>
               <td id="delete-button">
-                <button onClick={this.deleteCar(car.id)}>-</button>
+                <div onClick={this.deleteCar(car.id)}>-</div>
               </td>
               <td>{car.make}</td>
               <td>{car.model}</td>
@@ -104,9 +104,9 @@ class CarList extends React.Component {
     return (
       <div id="car-list">
         <div id="delete-mode-toggle-container">
-          <button id="delete-mode-toggle" onClick={this.toggleDeleteMode}>
+          <div id="delete-mode-toggle" onClick={this.toggleDeleteMode}>
             {this.toggleDeleteButton()}
-          </button>
+          </div>
         </div>
 
         <table id="displayed-cars">
