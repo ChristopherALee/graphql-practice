@@ -11,8 +11,23 @@ class CarList extends React.Component {
     super(props);
 
     this.state = {
-      deleteMode: true
+      deleteMode: false
     };
+
+    this.deleteCar = this.deleteCar.bind(this);
+    this.toggleDeleteMode = this.toggleDeleteMode.bind(this);
+  }
+
+  toggleDeleteMode() {
+    if (this.state.deleteMode) {
+      this.setState({
+        deleteMode: false
+      });
+    } else {
+      this.setState({
+        deleteMode: true
+      });
+    }
   }
 
   deleteCar(id) {
@@ -64,6 +79,8 @@ class CarList extends React.Component {
   render() {
     return (
       <div id="car-list">
+        <button onClick={this.toggleDeleteMode}>Edit</button>
+
         <table id="displayed-cars">
           <th id="cell-filler" />
           <th>Make</th>
