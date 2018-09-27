@@ -20,7 +20,7 @@ class CarList extends React.Component {
       return data.cars.map((car, idx) => {
         return (
           <tr id="car-item" key={car.id}>
-            <td>{idx + 1}</td>
+            <td id="row-number">{idx + 1}</td>
             <td>{car.make}</td>
             <td>{car.model}</td>
           </tr>
@@ -33,7 +33,7 @@ class CarList extends React.Component {
     return (
       <div id="car-list">
         <table id="displayed-cars">
-          <th />
+          <th id="cell-filler" />
           <th>Make</th>
           <th>Model</th>
           {this.displayCars()}

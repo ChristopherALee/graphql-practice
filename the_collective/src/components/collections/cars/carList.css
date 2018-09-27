@@ -7,3 +7,7 @@
 #displayed-cars {
   width: 100%;
 }
+
+#row-number {
+  text-align: center;
+}

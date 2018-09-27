@@ -9,7 +9,7 @@ class AddCar extends React.Component {
     super(props);
 
     this.state = {
-      make: "",
+      make: "Acura",
       model: ""
     };
 

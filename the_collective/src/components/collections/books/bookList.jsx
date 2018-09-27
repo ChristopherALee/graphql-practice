@@ -20,7 +20,7 @@ class BookList extends React.Component {
       return data.books.map((book, idx) => {
         return (
           <tr id="book-item" key={book.id}>
-            <td>{idx + 1}</td>
+            <td id="row-number">{idx + 1}</td>
             <td>{book.name}</td>
             <td>{book.author}</td>
             <td>{book.genre}</td>

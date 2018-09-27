@@ -1,0 +1,9 @@
+#car-options {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  outline: none;
+}
