@@ -42,7 +42,6 @@ class AddCar extends React.Component {
       })
       .then(() => {
         this.setState({
-          make: "",
           model: ""
         });
       });
@@ -64,18 +63,73 @@ class AddCar extends React.Component {
     }
   }
 
+  populateCarMakes() {
+    const carMakes = [
+      "Acura",
+      "Alfa Romeo",
+      "Aston Martin",
+      "Audi",
+      "Bentley",
+      "BMW",
+      "Bugatti",
+      "Buick",
+      "Cadillac",
+      "Chevrolet",
+      "Chrysler",
+      "Dodge",
+      "Ferrari",
+      "Fiat",
+      "Ford",
+      "GMC",
+      "Honda",
+      "Hyundai",
+      "Infiniti",
+      "Jaguar",
+      "Jeep",
+      "Kia",
+      "Koenigsegg",
+      "Lamborghini",
+      "Land Rover",
+      "Lexus",
+      "Maserati",
+      "Mazda",
+      "McLaren",
+      "Mercedes-Benz",
+      "Mini",
+      "Mitsubishi",
+      "Nissan",
+      "Pagani",
+      "Peugeot",
+      "Porsche",
+      "Ram",
+      "Rolls Royce",
+      "Saab",
+      "Subaru",
+      "Suzuki",
+      "Tesla",
+      "Toyota",
+      "Volkswagen",
+      "Volvo"
+    ];
+
+    return carMakes.map((make, idx) => {
+      return (
+        <option key={idx} value={make}>
+          {make}
+        </option>
+      );
+    });
+  }
+
   render() {
     return (
       <tr id="add-car-container">
         {this.renderSubmitButton()}
 
         <td className="field">
-          <input
-            type="text"
-            value={this.state.make}
-            onChange={this.handleChange("make")}
-            placeholder="Add Make..."
-          />
+          <select id="car-options" onChange={this.handleChange("make")}>
+            {this.populateCarMakes()}
+          </select>
         </td>
 
         <td className="field">
