@@ -2,9 +2,10 @@ import React from "react";
 import { graphql, compose } from "react-apollo";
 import "./bookList.css";
 
-import { getBooksQuery, deleteBookMutation } from "../../../queries/queries";
+import { getBooksQuery } from "../../../queries/queries";
 
 import AddBook from "./addBook/addBook";
+import EditBookList from "./editBooks/editBookList";
 
 class BookList extends React.Component {
   constructor(props) {
@@ -53,21 +54,6 @@ class BookList extends React.Component {
     }
   }
 
-  deleteBook(id) {
-    return e => {
-      this.props.deleteBookMutation({
-        variables: {
-          id: id
-        },
-        refetchQueries: [
-          {
-            query: getBooksQuery
-          }
-        ]
-      });
-    };
-  }
-
   displayBooks() {
     let data = this.props.getBooksQuery;
 
@@ -75,18 +61,7 @@ class BookList extends React.Component {
       return <div>Loading books...</div>;
     } else {
       if (this.state.deleteMode) {
-        return data.books.map((book, idx) => {
-          return (
-            <tr id="book-item" key={book.id}>
-              <td id="delete-button">
-                <div onClick={this.deleteBook(book.id)}>-</div>
-              </td>
-              <td id="delete-cell">{book.name}</td>
-              <td id="delete-cell">{book.author}</td>
-              <td id="delete-cell">{book.genre}</td>
-            </tr>
-          );
-        });
+        return <EditBookList books={data.books} />;
       } else {
         return data.books.map((book, idx) => {
           return (
@@ -124,8 +99,6 @@ class BookList extends React.Component {
   }
 }
 
-// export default graphql(getBooksQuery)(BookList);
-export default compose(
-  graphql(getBooksQuery, { name: "getBooksQuery" }),
-  graphql(deleteBookMutation, { name: "deleteBookMutation" })
-)(BookList);
+export default compose(graphql(getBooksQuery, { name: "getBooksQuery" }))(
+  BookList
+);
