@@ -12,7 +12,7 @@ class EditBookList extends React.Component {
 
   renderBooks() {
     let books = this.props.books;
-    debugger;
+
     return books.map((book, idx) => {
       return <EditBook book={book} />;
     });
