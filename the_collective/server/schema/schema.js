@@ -180,7 +180,7 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         let car = Car.findById(args.id);
 
-        return car.remove();
+        return car.deleteOne();
       }
     }
   }
