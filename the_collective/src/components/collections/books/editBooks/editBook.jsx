@@ -18,12 +18,29 @@ class EditBook extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.editBook = this.editBook.bind(this);
   }
 
   handleChange(field) {
     return e => {
       this.setState({ [field]: e.target.value });
     };
+  }
+
+  editBook() {
+    this.props.editBookMutation({
+      variables: {
+        id: this.props.book.id,
+        name: this.state.name,
+        author: this.state.author,
+        genre: this.state.genre
+      },
+      refetchQueries: [
+        {
+          query: getBooksQuery
+        }
+      ]
+    });
   }
 
   deleteBook(id) {
@@ -70,6 +87,10 @@ class EditBook extends React.Component {
             value={this.state.genre}
             onChange={this.handleChange("genre")}
           />
+        </td>
+
+        <td id="done-editing" onClick={this.editBook}>
+          Finish Editing
         </td>
       </tr>
     );
