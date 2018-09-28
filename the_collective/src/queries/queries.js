@@ -22,6 +22,17 @@ const addBookMutation = gql`
   }
 `;
 
+const deleteBookMutation = gql`
+  mutation($id: String!) {
+    deleteBook(id: $id) {
+      name
+      genre
+      author
+      id
+    }
+  }
+`;
+
 const getCarsQuery = gql`
   {
     cars {
