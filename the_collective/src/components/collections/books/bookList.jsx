@@ -9,6 +9,48 @@ import AddBook from "./addBook/addBook";
 class BookList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      deleteMode: false
+    };
+
+    this.toggleDeleteMode = this.toggleDeleteMode.bind(this);
+  }
+
+  toggleDeleteMode() {
+    if (this.state.deleteMode) {
+      this.setState({
+        deleteMode: false
+      });
+    } else {
+      this.setState({
+        deleteMode: true
+      });
+    }
+  }
+
+  toggleDeleteButton() {
+    if (this.state.deleteMode) {
+      return (
+        <button
+          id="delete-mode-toggle"
+          className="delete-mode-active"
+          onClick={this.toggleDeleteMode}
+        >
+          Cancel
+        </button>
+      );
+    } else {
+      return (
+        <button
+          id="delete-mode-toggle"
+          className="delete-mode-inactive"
+          onClick={this.toggleDeleteMode}
+        >
+          Edit
+        </button>
+      );
+    }
   }
 
   displayBooks() {
@@ -33,6 +75,12 @@ class BookList extends React.Component {
   render() {
     return (
       <div id="book-list">
+        <div id="delete-mode-toggle-container">
+          <div id="delete-mode-toggle" onClick={this.toggleDeleteMode}>
+            {this.toggleDeleteButton()}
+          </div>
+        </div>
+
         <table id="displayed-books">
           <th />
           <th>Name</th>
