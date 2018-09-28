@@ -112,7 +112,7 @@ class BookList extends React.Component {
         </div>
 
         <table id="displayed-books">
-          <th />
+          <th id="cell-filler" />
           <th>Name</th>
           <th>Author</th>
           <th>Genre</th>
