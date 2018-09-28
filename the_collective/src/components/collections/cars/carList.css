@@ -63,4 +63,9 @@
 
 #cell-filler {
   width: 25px;
+  background-color: lightgrey;
+}
+
+#delete-cell {
+  background-color: lightgrey;
 }

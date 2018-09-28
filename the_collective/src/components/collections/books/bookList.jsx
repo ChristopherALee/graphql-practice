@@ -81,9 +81,9 @@ class BookList extends React.Component {
               <td id="delete-button">
                 <div onClick={this.deleteBook(book.id)}>-</div>
               </td>
-              <td>{book.name}</td>
-              <td>{book.author}</td>
-              <td>{book.genre}</td>
+              <td id="delete-cell">{book.name}</td>
+              <td id="delete-cell">{book.author}</td>
+              <td id="delete-cell">{book.genre}</td>
             </tr>
           );
         });

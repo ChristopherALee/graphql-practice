@@ -81,8 +81,8 @@ class CarList extends React.Component {
               <td id="delete-button">
                 <div onClick={this.deleteCar(car.id)}>-</div>
               </td>
-              <td>{car.make}</td>
-              <td>{car.model}</td>
+              <td id="delete-cell">{car.make}</td>
+              <td id="delete-cell">{car.model}</td>
             </tr>
           );
         });
