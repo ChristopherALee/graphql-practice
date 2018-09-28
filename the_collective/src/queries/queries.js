@@ -66,6 +66,7 @@ const deleteCarMutation = gql`
 export {
   getBooksQuery,
   addBookMutation,
+  deleteBookMutation,
   getCarsQuery,
   addCarMutation,
   deleteCarMutation
