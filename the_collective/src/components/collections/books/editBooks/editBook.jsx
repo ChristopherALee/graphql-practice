@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
+import "./editBook.css";
 
 import {
   getBooksQuery,

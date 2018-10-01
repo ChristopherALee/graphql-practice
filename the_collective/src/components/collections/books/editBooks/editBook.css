@@ -1,0 +1,9 @@
+#done-editing {
+  text-align: center;
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+#done-editing:hover {
+  background-color: rgb(236, 236, 236);
+}
