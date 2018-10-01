@@ -64,6 +64,16 @@ const addCarMutation = gql`
   }
 `;
 
+const editCarMutation = gql`
+  mutation($id: String!, $make: String!, $model: String!) {
+    editCar(id: $id, make: $make, model: $model) {
+      make
+      model
+      id
+    }
+  }
+`;
+
 const deleteCarMutation = gql`
   mutation($id: String!) {
     deleteCar(id: $id) {
@@ -81,5 +91,6 @@ export {
   deleteBookMutation,
   getCarsQuery,
   addCarMutation,
+  editCarMutation,
   deleteCarMutation
 };

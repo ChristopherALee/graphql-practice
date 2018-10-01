@@ -5,6 +5,7 @@ import { getCarsQuery, deleteCarMutation } from "../../../queries/queries";
 import { graphql, compose } from "react-apollo";
 
 import AddCar from "./addCar/addCar";
+import EditCar from "./editCars/editCars";
 
 class CarList extends React.Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class CarList extends React.Component {
       deleteMode: false
     };
 
-    this.deleteCar = this.deleteCar.bind(this);
     this.toggleDeleteMode = this.toggleDeleteMode.bind(this);
   }
 
@@ -54,20 +54,6 @@ class CarList extends React.Component {
     }
   }
 
-  deleteCar(id) {
-    return e =>
-      this.props.deleteCarMutation({
-        variables: {
-          id: id
-        },
-        refetchQueries: [
-          {
-            query: getCarsQuery
-          }
-        ]
-      });
-  }
-
   displayCars() {
     let data = this.props.getCarsQuery;
 
@@ -76,15 +62,7 @@ class CarList extends React.Component {
     } else {
       if (this.state.deleteMode) {
         return data.cars.map((car, idx) => {
-          return (
-            <tr id="car-item" key={car.id}>
-              <td id="delete-button">
-                <div onClick={this.deleteCar(car.id)}>-</div>
-              </td>
-              <td id="delete-cell">{car.make}</td>
-              <td id="delete-cell">{car.model}</td>
-            </tr>
-          );
+          return <EditCar car={car} />;
         });
       } else {
         return data.cars.map((car, idx) => {
@@ -121,7 +99,6 @@ class CarList extends React.Component {
   }
 }
 
-// export default graphql(getCarsQuery)(CarList);
 export default compose(
   graphql(getCarsQuery, { name: "getCarsQuery" }),
   graphql(deleteCarMutation, { name: "deleteCarMutation" })
