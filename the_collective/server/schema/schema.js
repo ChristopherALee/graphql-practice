@@ -168,7 +168,7 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         let book = Book.findById(args.id);
 
-        return book.update({
+        return book.updateOne({
           name: args.name,
           genre: args.genre,
           author: args.author

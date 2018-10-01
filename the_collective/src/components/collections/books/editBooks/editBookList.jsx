@@ -14,7 +14,7 @@ class EditBookList extends React.Component {
     let books = this.props.books;
 
     return books.map((book, idx) => {
-      return <EditBook book={book} />;
+      return <EditBook key={book.id} book={book} />;
     });
   }
 
