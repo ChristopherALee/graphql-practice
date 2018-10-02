@@ -6,7 +6,6 @@ import { graphql, compose } from "react-apollo";
 
 import AddCar from "./addCar/addCar";
 import EditCar from "./editCar/editCar";
-import { runInThisContext } from "vm";
 
 class CarList extends React.Component {
   constructor(props) {
