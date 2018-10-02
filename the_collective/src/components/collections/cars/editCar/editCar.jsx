@@ -42,18 +42,22 @@ class EditCar extends React.Component {
   }
 
   editCar() {
-    this.props.editCarMutation({
-      variables: {
-        id: this.state.id,
-        make: this.state.make,
-        model: this.state.model
-      },
-      refetchQueries: [
-        {
-          query: getCarsQuery
-        }
-      ]
-    });
+    if (this.isFinishButtonActive) {
+      this.setState({ isFinishButtonActive: false });
+
+      this.props.editCarMutation({
+        variables: {
+          id: this.state.id,
+          make: this.state.make,
+          model: this.state.model
+        },
+        refetchQueries: [
+          {
+            query: getCarsQuery
+          }
+        ]
+      });
+    }
   }
 
   deleteCar(id) {

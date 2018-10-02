@@ -43,6 +43,8 @@ class EditBook extends React.Component {
   }
 
   editBook() {
+    this.setState({ isFinishButtonActive: false });
+
     this.props.editBookMutation({
       variables: {
         id: this.state.id,

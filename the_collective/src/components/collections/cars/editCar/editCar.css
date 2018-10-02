@@ -1,7 +1,7 @@
 .active-edit {
   background-color: rgb(236, 68, 68);
   color: white;
-  font-weight: bold;
+  cursor: pointer;
 }
 
 .active-edit:hover {
@@ -10,8 +10,4 @@
 
 .inactive-edit {
   background-color: lightgrey;
-}
-
-.inactive-edit:hover {
-  background-color: rgb(236, 236, 236);
 }
