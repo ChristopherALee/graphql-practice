@@ -5,7 +5,7 @@ import { getCarsQuery, deleteCarMutation } from "../../../queries/queries";
 import { graphql, compose } from "react-apollo";
 
 import AddCar from "./addCar/addCar";
-import EditCar from "./editCars/editCars";
+import EditCar from "./editCar/editCar";
 
 class CarList extends React.Component {
   constructor(props) {
@@ -14,6 +14,54 @@ class CarList extends React.Component {
     this.state = {
       deleteMode: false
     };
+
+    this.carMakes = [
+      "Acura",
+      "Alfa Romeo",
+      "Aston Martin",
+      "Audi",
+      "Bentley",
+      "BMW",
+      "Bugatti",
+      "Buick",
+      "Cadillac",
+      "Chevrolet",
+      "Chrysler",
+      "Dodge",
+      "Ferrari",
+      "Fiat",
+      "Ford",
+      "GMC",
+      "Honda",
+      "Hyundai",
+      "Infiniti",
+      "Jaguar",
+      "Jeep",
+      "Kia",
+      "Koenigsegg",
+      "Lamborghini",
+      "Land Rover",
+      "Lexus",
+      "Maserati",
+      "Mazda",
+      "McLaren",
+      "Mercedes-Benz",
+      "Mini",
+      "Mitsubishi",
+      "Nissan",
+      "Pagani",
+      "Peugeot",
+      "Porsche",
+      "Ram",
+      "Rolls Royce",
+      "Saab",
+      "Subaru",
+      "Suzuki",
+      "Tesla",
+      "Toyota",
+      "Volkswagen",
+      "Volvo"
+    ];
 
     this.toggleDeleteMode = this.toggleDeleteMode.bind(this);
   }
@@ -62,7 +110,7 @@ class CarList extends React.Component {
     } else {
       if (this.state.deleteMode) {
         return data.cars.map((car, idx) => {
-          return <EditCar car={car} />;
+          return <EditCar carMakes={this.carMakes} car={car} />;
         });
       } else {
         return data.cars.map((car, idx) => {
@@ -92,7 +140,7 @@ class CarList extends React.Component {
           <th>Make</th>
           <th>Model</th>
           {this.displayCars()}
-          <AddCar />
+          <AddCar carMakes={this.carMakes} />
         </table>
       </div>
     );

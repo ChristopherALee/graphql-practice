@@ -64,55 +64,7 @@ class AddCar extends React.Component {
   }
 
   populateCarMakes() {
-    const carMakes = [
-      "Acura",
-      "Alfa Romeo",
-      "Aston Martin",
-      "Audi",
-      "Bentley",
-      "BMW",
-      "Bugatti",
-      "Buick",
-      "Cadillac",
-      "Chevrolet",
-      "Chrysler",
-      "Dodge",
-      "Ferrari",
-      "Fiat",
-      "Ford",
-      "GMC",
-      "Honda",
-      "Hyundai",
-      "Infiniti",
-      "Jaguar",
-      "Jeep",
-      "Kia",
-      "Koenigsegg",
-      "Lamborghini",
-      "Land Rover",
-      "Lexus",
-      "Maserati",
-      "Mazda",
-      "McLaren",
-      "Mercedes-Benz",
-      "Mini",
-      "Mitsubishi",
-      "Nissan",
-      "Pagani",
-      "Peugeot",
-      "Porsche",
-      "Ram",
-      "Rolls Royce",
-      "Saab",
-      "Subaru",
-      "Suzuki",
-      "Tesla",
-      "Toyota",
-      "Volkswagen",
-      "Volvo"
-    ];
-
-    return carMakes.map((make, idx) => {
+    return this.props.carMakes.map((make, idx) => {
       return (
         <option key={idx} value={make}>
           {make}
