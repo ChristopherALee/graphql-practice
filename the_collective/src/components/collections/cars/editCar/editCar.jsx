@@ -61,7 +61,7 @@ class EditCar extends React.Component {
   }
 
   deleteCar(id) {
-    return e =>
+    return e => {
       this.props.deleteCarMutation({
         variables: {
           id: id
@@ -72,6 +72,7 @@ class EditCar extends React.Component {
           }
         ]
       });
+    };
   }
 
   populateCarMakes() {

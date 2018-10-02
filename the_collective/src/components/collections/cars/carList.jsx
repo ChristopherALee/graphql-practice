@@ -118,7 +118,18 @@ class CarList extends React.Component {
       if (this.state.sortBy) {
         sortedCars = this.sortCarsBy(this.state.sortBy, data.cars);
       } else {
-        sortedCars = data.cars;
+        sortedCars = data.cars.sort((a, b) => {
+          let aId = a.id;
+          let bId = b.id;
+
+          if (aId < bId) {
+            return -1;
+          } else if (bId < aId) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
       }
 
       if (this.state.deleteMode) {
@@ -152,6 +163,10 @@ class CarList extends React.Component {
         sortedState = this.state.makeSort.slice(1);
         sortedState.push(pivotEl);
 
+        if (!sortedState[0]) {
+          this.setState({ sortBy: null });
+        }
+
         this.setState({
           makeSort: sortedState,
           modelSort: [null, "ascending", "descending"]
@@ -160,6 +175,10 @@ class CarList extends React.Component {
         pivotEl = this.state.modelSort[0];
         sortedState = this.state.modelSort.slice(1);
         sortedState.push(pivotEl);
+
+        if (!sortedState[0]) {
+          this.setState({ sortBy: null });
+        }
 
         this.setState({
           makeSort: [null, "ascending", "descending"],
