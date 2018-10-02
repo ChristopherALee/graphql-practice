@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { Route, Switch, HashRouter } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import "./index.css";
@@ -14,10 +14,6 @@ const client = new ApolloClient({
 });
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Provider store={this.props.store}>

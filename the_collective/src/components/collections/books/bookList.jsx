@@ -5,7 +5,7 @@ import "./bookList.css";
 import { getBooksQuery } from "../../../queries/queries";
 
 import AddBook from "./addBook/addBook";
-import EditBookList from "./editBooks/editBookList";
+import EditBook from "./editBook/editBook";
 
 class BookList extends React.Component {
   constructor(props) {
@@ -61,7 +61,9 @@ class BookList extends React.Component {
       return <div>Loading books...</div>;
     } else {
       if (this.state.deleteMode) {
-        return <EditBookList books={data.books} />;
+        return data.books.map((book, idx) => {
+          return <EditBook key={book.id} book={book} />;
+        });
       } else {
         return data.books.map((book, idx) => {
           return (
