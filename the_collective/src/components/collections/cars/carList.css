@@ -71,21 +71,23 @@
 }
 
 #descending-arrow {
+  margin-left: 5px;
   width: 0;
   height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
 
-  border-top: 10px solid #f00;
+  border-top: 6px solid #f00;
 }
 
 #ascending-arrow {
+  margin-left: 5px;
   width: 0;
   height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
 
-  border-bottom: 10px solid #f00;
+  border-bottom: 6px solid #f00;
 }
 
 #displayed-cars th p {
