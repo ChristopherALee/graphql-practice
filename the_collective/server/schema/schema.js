@@ -207,6 +207,14 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLString) },
         make: { type: new GraphQLNonNull(GraphQLString) },
         model: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        let car = Car.findById(args.id);
+
+        return car.updateOne({
+          make: args.make,
+          model: args.model
+        });
       }
     },
     deleteCar: {
