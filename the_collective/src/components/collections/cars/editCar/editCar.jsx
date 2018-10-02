@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
+import "./editCar.css";
 import {
   getCarsQuery,
   editCarMutation,
@@ -13,17 +14,30 @@ class EditCar extends React.Component {
     this.state = {
       id: this.props.car.id,
       make: this.props.car.make,
-      model: this.props.car.model
+      model: this.props.car.model,
+      isFinishButtonActive: false
     };
 
+    this.toggleActive = this.toggleActive.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.editCar = this.editCar.bind(this);
     this.deleteCar = this.deleteCar.bind(this);
   }
 
+  toggleActive() {
+    if (this.state.isFinishButtonActive) {
+      return "active-edit";
+    } else {
+      return "inactive-edit";
+    }
+  }
+
   handleChange(field) {
     return e => {
-      this.setState({ [field]: e.target.value });
+      this.setState({
+        [field]: e.target.value,
+        isFinishButtonActive: true
+      });
     };
   }
 
@@ -95,7 +109,11 @@ class EditCar extends React.Component {
           />
         </td>
 
-        <td id="done-editing" onClick={this.editCar}>
+        <td
+          id="done-editing"
+          className={this.toggleActive()}
+          onClick={this.editCar}
+        >
           Finish Editing
         </td>
       </tr>
