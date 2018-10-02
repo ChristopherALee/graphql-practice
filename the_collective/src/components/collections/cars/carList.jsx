@@ -12,7 +12,10 @@ class CarList extends React.Component {
     super(props);
 
     this.state = {
-      deleteMode: false
+      deleteMode: false,
+      sortBy: null,
+      makeSort: null,
+      modelSort: null
     };
 
     this.carMakes = [
@@ -64,6 +67,8 @@ class CarList extends React.Component {
     ];
 
     this.toggleDeleteMode = this.toggleDeleteMode.bind(this);
+    this.sortBy = this.sortBy.bind(this);
+    this.sortCarsBy = this.sortCarsBy.bind(this);
   }
 
   toggleDeleteMode() {
@@ -108,12 +113,20 @@ class CarList extends React.Component {
     if (data.loading) {
       return <div>Loading cars...</div>;
     } else {
+      let sortedCars;
+
+      if (this.state.sortBy) {
+        sortedCars = this.sortCarsBy(this.state.sortBy, data.cars);
+      } else {
+        sortedCars = data.cars;
+      }
+
       if (this.state.deleteMode) {
-        return data.cars.map((car, idx) => {
+        return sortedCars.map((car, idx) => {
           return <EditCar carMakes={this.carMakes} car={car} />;
         });
       } else {
-        return data.cars.map((car, idx) => {
+        return sortedCars.map((car, idx) => {
           return (
             <tr id="car-item" key={car.id}>
               <td id="row-number">{idx + 1}</td>
@@ -123,6 +136,82 @@ class CarList extends React.Component {
           );
         });
       }
+    }
+  }
+
+  sortBy(field) {
+    return e => {
+      this.setState({
+        sortBy: field
+      });
+
+      if (field === "make") {
+        if (this.state.makeSort === "ascending") {
+          this.setState({ makeSort: "descending" });
+        } else if (this.state.makeSort === "descending") {
+          this.setState({ makeSort: "ascending" });
+        } else {
+          this.setState({ makeSort: "ascending" });
+        }
+      }
+    };
+  }
+
+  sortCarsBy(field, cars) {
+    if (field === "make") {
+      if (this.state.makeSort === "ascending") {
+        return cars.sort((a, b) => {
+          let aCar = a.make;
+          let bCar = b.make;
+
+          if (aCar < bCar) {
+            return -1;
+          } else if (bCar < aCar) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      } else if (this.state.makeSort === "descending") {
+        return cars.sort((a, b) => {
+          let aCar = a.make;
+          let bCar = b.make;
+
+          if (aCar > bCar) {
+            return -1;
+          } else if (bCar > aCar) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      } else {
+        return cars.sort((a, b) => {
+          let aCar = a.make;
+          let bCar = b.make;
+
+          if (aCar < bCar) {
+            return -1;
+          } else if (bCar < aCar) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      }
+    } else if (field === "model") {
+      return cars.sort((a, b) => {
+        let aCar = a.model;
+        let bCar = b.model;
+
+        if (aCar < bCar) {
+          return -1;
+        } else if (bCar < aCar) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
     }
   }
 
@@ -137,7 +226,7 @@ class CarList extends React.Component {
 
         <table id="displayed-cars">
           <th id="cell-filler" />
-          <th>Make</th>
+          <th onClick={this.sortBy("make")}>Make</th>
           <th>Model</th>
           {this.displayCars()}
           <AddCar carMakes={this.carMakes} />
