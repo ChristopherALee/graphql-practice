@@ -5,6 +5,7 @@
 #header h1 {
   padding: 20px 0 10px 20px;
   font-size: 30px;
+  font-weight: 600;
 }
 
 #header h1:hover {
