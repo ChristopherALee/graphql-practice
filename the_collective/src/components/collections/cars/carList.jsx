@@ -279,11 +279,11 @@ class CarList extends React.Component {
         <table id="displayed-cars">
           <th id="cell-filler" />
 
-          <th onClick={this.sortBy("make")}>
+          <th className="column-header" onClick={this.sortBy("make")}>
             <p>Make {this.sortIcon("make")}</p>
           </th>
 
-          <th onClick={this.sortBy("model")}>
+          <th className="column-header" onClick={this.sortBy("model")}>
             <p>Model {this.sortIcon("model")}</p>
           </th>
 
