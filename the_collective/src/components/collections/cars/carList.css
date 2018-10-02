@@ -100,3 +100,8 @@
   user-select: none;
   cursor: pointer;
 }
+
+.column-header-inactive {
+  user-select: none;
+  cursor: default;
+}

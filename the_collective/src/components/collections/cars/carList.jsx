@@ -152,38 +152,40 @@ class CarList extends React.Component {
 
   sortBy(field) {
     return e => {
-      this.setState({
-        sortBy: field
-      });
-
-      let pivotEl, sortedState;
-
-      if (field === "make") {
-        pivotEl = this.state.makeSort[0];
-        sortedState = this.state.makeSort.slice(1);
-        sortedState.push(pivotEl);
-
-        if (!sortedState[0]) {
-          this.setState({ sortBy: null });
-        }
-
+      if (!this.state.deleteMode) {
         this.setState({
-          makeSort: sortedState,
-          modelSort: [null, "ascending", "descending"]
+          sortBy: field
         });
-      } else if (field === "model") {
-        pivotEl = this.state.modelSort[0];
-        sortedState = this.state.modelSort.slice(1);
-        sortedState.push(pivotEl);
 
-        if (!sortedState[0]) {
-          this.setState({ sortBy: null });
+        let pivotEl, sortedState;
+
+        if (field === "make") {
+          pivotEl = this.state.makeSort[0];
+          sortedState = this.state.makeSort.slice(1);
+          sortedState.push(pivotEl);
+
+          if (!sortedState[0]) {
+            this.setState({ sortBy: null });
+          }
+
+          this.setState({
+            makeSort: sortedState,
+            modelSort: [null, "ascending", "descending"]
+          });
+        } else if (field === "model") {
+          pivotEl = this.state.modelSort[0];
+          sortedState = this.state.modelSort.slice(1);
+          sortedState.push(pivotEl);
+
+          if (!sortedState[0]) {
+            this.setState({ sortBy: null });
+          }
+
+          this.setState({
+            makeSort: [null, "ascending", "descending"],
+            modelSort: sortedState
+          });
         }
-
-        this.setState({
-          makeSort: [null, "ascending", "descending"],
-          modelSort: sortedState
-        });
       }
     };
   }
@@ -290,6 +292,14 @@ class CarList extends React.Component {
     }
   }
 
+  columnHeaderClassNameToggle() {
+    if (this.state.deleteMode) {
+      return "column-header-inactive";
+    } else {
+      return "column-header";
+    }
+  }
+
   render() {
     return (
       <div id="car-list">
@@ -302,11 +312,17 @@ class CarList extends React.Component {
         <table id="displayed-cars">
           <th id="cell-filler" />
 
-          <th className="column-header" onClick={this.sortBy("make")}>
+          <th
+            className={this.columnHeaderClassNameToggle()}
+            onClick={this.sortBy("make")}
+          >
             <p>Make {this.sortIcon("make")}</p>
           </th>
 
-          <th className="column-header" onClick={this.sortBy("model")}>
+          <th
+            className={this.columnHeaderClassNameToggle()}
+            onClick={this.sortBy("model")}
+          >
             <p>Model {this.sortIcon("model")}</p>
           </th>
 
