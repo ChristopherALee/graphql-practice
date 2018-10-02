@@ -14,8 +14,8 @@ class CarList extends React.Component {
     this.state = {
       deleteMode: false,
       sortBy: null,
-      makeSort: null,
-      modelSort: null
+      makeSort: [null, "ascending", "descending"],
+      modelSort: [null, "ascending", "descending"]
     };
 
     this.carMakes = [
@@ -145,29 +145,33 @@ class CarList extends React.Component {
         sortBy: field
       });
 
+      let pivotEl, sortedState;
+
       if (field === "make") {
-        if (this.state.makeSort === "ascending") {
-          this.setState({ makeSort: "descending" });
-        } else if (this.state.makeSort === "descending") {
-          this.setState({ makeSort: "ascending" });
-        } else {
-          this.setState({ makeSort: "ascending" });
-        }
+        pivotEl = this.state.makeSort[0];
+        sortedState = this.state.makeSort.slice(1);
+        sortedState.push(pivotEl);
+
+        this.setState({
+          makeSort: sortedState,
+          modelSort: [null, "ascending", "descending"]
+        });
       } else if (field === "model") {
-        if (this.state.modelSort === "ascending") {
-          this.setState({ modelSort: "descending" });
-        } else if (this.state.modelSort === "descending") {
-          this.setState({ modelSort: "ascending" });
-        } else {
-          this.setState({ modelSort: "ascending" });
-        }
+        pivotEl = this.state.modelSort[0];
+        sortedState = this.state.modelSort.slice(1);
+        sortedState.push(pivotEl);
+
+        this.setState({
+          makeSort: [null, "ascending", "descending"],
+          modelSort: sortedState
+        });
       }
     };
   }
 
   sortCarsBy(field, cars) {
     if (field === "make") {
-      if (this.state.makeSort === "ascending") {
+      if (this.state.makeSort[0] === "ascending") {
         return cars.sort((a, b) => {
           let aCar = a.make;
           let bCar = b.make;
@@ -180,7 +184,7 @@ class CarList extends React.Component {
             return 0;
           }
         });
-      } else if (this.state.makeSort === "descending") {
+      } else if (this.state.makeSort[0] === "descending") {
         return cars.sort((a, b) => {
           let aCar = a.make;
           let bCar = b.make;
@@ -208,7 +212,7 @@ class CarList extends React.Component {
         });
       }
     } else if (field === "model") {
-      if (this.state.modelSort === "ascending") {
+      if (this.state.modelSort[0] === "ascending") {
         return cars.sort((a, b) => {
           let aCar = a.model;
           let bCar = b.model;
@@ -221,7 +225,7 @@ class CarList extends React.Component {
             return 0;
           }
         });
-      } else if (this.state.modelSort === "descending") {
+      } else if (this.state.modelSort[0] === "descending") {
         return cars.sort((a, b) => {
           let aCar = a.model;
           let bCar = b.model;
@@ -253,15 +257,15 @@ class CarList extends React.Component {
 
   sortIcon(field) {
     if (field === "make" && this.state.sortBy === "make") {
-      if (this.state.makeSort === "ascending") {
+      if (this.state.makeSort[0] === "ascending") {
         return <div id="ascending-arrow" />;
-      } else {
+      } else if (this.state.makeSort[0] === "descending") {
         return <div id="descending-arrow" />;
       }
     } else if (field === "model" && this.state.sortBy === "model") {
-      if (this.state.modelSort === "ascending") {
+      if (this.state.modelSort[0] === "ascending") {
         return <div id="ascending-arrow" />;
-      } else {
+      } else if (this.state.modelSort[0] === "descending") {
         return <div id="descending-arrow" />;
       }
     }
