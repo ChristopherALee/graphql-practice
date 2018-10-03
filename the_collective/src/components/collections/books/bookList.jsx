@@ -12,10 +12,15 @@ class BookList extends React.Component {
     super(props);
 
     this.state = {
-      deleteMode: false
+      deleteMode: false,
+      sortBy: null,
+      nameSort: [null, "ascending", "descending"],
+      authorSort: [null, "ascending", "descending"]
     };
 
     this.toggleDeleteMode = this.toggleDeleteMode.bind(this);
+    this.sortBy = this.sortBy.bind(this);
+    this.sortBooksBy = this.sortBooksBy.bind(this);
   }
 
   toggleDeleteMode() {
@@ -60,8 +65,10 @@ class BookList extends React.Component {
     if (data.loading) {
       return <div>Loading books...</div>;
     } else {
+      let sortedBooks = this.sortBooksBy(this.state.sortBy, data.books);
+      debugger;
       if (this.state.deleteMode) {
-        return data.books.map((book, idx) => {
+        return sortedBooks.map((book, idx) => {
           return <EditBook key={book.id} book={book} />;
         });
       } else {
@@ -79,6 +86,131 @@ class BookList extends React.Component {
     }
   }
 
+  sortBy(field) {
+    return e => {
+      if (!this.state.deleteMode) {
+        this.setState({ sortBy: field });
+
+        let pivotEl, sortedState;
+
+        switch (field) {
+          case "name":
+            pivotEl = this.state.nameSort[0];
+            sortedState = this.state.nameSort.slice(1);
+            sortedState.push(pivotEl);
+
+            if (!sortedState[0]) {
+              this.setState({ sortBy: null });
+            }
+            debugger;
+            this.setState({
+              nameSort: sortedState,
+              authorSort: [null, "ascending", "descending"],
+              genreSort: [null, "ascending", "descending"]
+            });
+            break;
+          case "author":
+            pivotEl = this.state.authorSort[0];
+            sortedState = this.state.authorSort.slice(1);
+            sortedState.push(pivotEl);
+
+            if (!sortedState[0]) {
+              this.setState({ sortBy: null });
+            }
+
+            this.setState({
+              nameSort: [null, "ascending", "descending"],
+              authorSort: sortedState,
+              genreSort: [null, "ascending", "descending"]
+            });
+            break;
+          case "genre":
+            pivotEl = this.state.genreSort[0];
+            sortedState = this.state.genreSort.slice(1);
+            sortedState.push(pivotEl);
+
+            if (!sortedState[0]) {
+              this.setState({ sortBy: null });
+            }
+
+            this.setState({
+              nameSort: [null, "ascending", "descending"],
+              authorSort: [null, "ascending", "descending"],
+              genreSort: sortedState
+            });
+            break;
+          default:
+            break;
+        }
+      }
+    };
+  }
+
+  sortBooksBy(field, books) {
+    switch (field) {
+      case "name":
+        if (this.state.nameSort[0] === "ascending") {
+          debugger;
+          return books.sort((a, b) => {
+            let aBook = a.name;
+            let bBook = b.name;
+
+            if (aBook < bBook) {
+              return -1;
+            } else if (bBook < aBook) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        } else if (this.state.nameSort[0] === "descending") {
+          return books.sort((a, b) => {
+            let aBook = a.name;
+            let bBook = b.name;
+
+            if (aBook > bBook) {
+              return -1;
+            } else if (bBook > aBook) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        }
+      default:
+        return books.sort((a, b) => {
+          let aBook = a.id;
+          let bBook = b.id;
+
+          if (aBook < bBook) {
+            return -1;
+          } else if (bBook < aBook) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+    }
+  }
+
+  sortIcon(field) {
+    if (field === "name" && this.state.sortBy === "name") {
+      if (this.state.nameSort[0] === "ascending") {
+        return <div id="ascending-arrow" />;
+      } else if (this.state.nameSort[0] === "descending") {
+        return <div id="descending-arrow" />;
+      }
+    }
+  }
+
+  columnHeaderClassNameToggle() {
+    if (this.state.deleteMode) {
+      return "column-header-inactive";
+    } else {
+      return "column-header";
+    }
+  }
+
   render() {
     return (
       <div id="book-list">
@@ -90,10 +222,20 @@ class BookList extends React.Component {
 
         <table id="displayed-books">
           <th id="cell-filler" />
-          <th>Name</th>
+
+          <th
+            className={this.columnHeaderClassNameToggle()}
+            onClick={this.sortBy("name")}
+          >
+            <p>Name {this.sortIcon("name")}</p>
+          </th>
+
           <th>Author</th>
+
           <th>Genre</th>
+
           {this.displayBooks()}
+
           <AddBook />
         </table>
       </div>

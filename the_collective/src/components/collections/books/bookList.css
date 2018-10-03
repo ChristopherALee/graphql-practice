@@ -23,6 +23,12 @@ td {
   width: 100%;
 }
 
+#displayed-books th p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #book-item p {
   width: 33.3%;
 }

@@ -153,9 +153,7 @@ class CarList extends React.Component {
   sortBy(field) {
     return e => {
       if (!this.state.deleteMode) {
-        this.setState({
-          sortBy: field
-        });
+        this.setState({ sortBy: field });
 
         let pivotEl, sortedState;
 
