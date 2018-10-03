@@ -113,24 +113,7 @@ class CarList extends React.Component {
     if (data.loading) {
       return <div>Loading cars...</div>;
     } else {
-      let sortedCars;
-
-      if (this.state.sortBy) {
-        sortedCars = this.sortCarsBy(this.state.sortBy, data.cars);
-      } else {
-        sortedCars = data.cars.sort((a, b) => {
-          let aId = a.id;
-          let bId = b.id;
-
-          if (aId < bId) {
-            return -1;
-          } else if (bId < aId) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      }
+      let sortedCars = this.sortCarsBy(this.state.sortBy, data.cars);
 
       if (this.state.deleteMode) {
         return sortedCars.map((car, idx) => {
@@ -157,120 +140,115 @@ class CarList extends React.Component {
 
         let pivotEl, sortedState;
 
-        if (field === "make") {
-          pivotEl = this.state.makeSort[0];
-          sortedState = this.state.makeSort.slice(1);
-          sortedState.push(pivotEl);
+        switch (field) {
+          case "make":
+            pivotEl = this.state.makeSort[0];
+            sortedState = this.state.makeSort.slice(1);
+            sortedState.push(pivotEl);
 
-          if (!sortedState[0]) {
-            this.setState({ sortBy: null });
-          }
+            if (!sortedState[0]) {
+              this.setState({ sortBy: null });
+            }
 
-          this.setState({
-            makeSort: sortedState,
-            modelSort: [null, "ascending", "descending"]
-          });
-        } else if (field === "model") {
-          pivotEl = this.state.modelSort[0];
-          sortedState = this.state.modelSort.slice(1);
-          sortedState.push(pivotEl);
+            this.setState({
+              makeSort: sortedState,
+              modelSort: [null, "ascending", "descending"]
+            });
+            break;
+          case "model":
+            pivotEl = this.state.modelSort[0];
+            sortedState = this.state.modelSort.slice(1);
+            sortedState.push(pivotEl);
 
-          if (!sortedState[0]) {
-            this.setState({ sortBy: null });
-          }
+            if (!sortedState[0]) {
+              this.setState({ sortBy: null });
+            }
 
-          this.setState({
-            makeSort: [null, "ascending", "descending"],
-            modelSort: sortedState
-          });
+            this.setState({
+              makeSort: [null, "ascending", "descending"],
+              modelSort: sortedState
+            });
+            break;
+          default:
+            break;
         }
       }
     };
   }
 
   sortCarsBy(field, cars) {
-    if (field === "make") {
-      if (this.state.makeSort[0] === "ascending") {
+    switch (field) {
+      case "make":
+        if (this.state.makeSort[0] === "ascending") {
+          return cars.sort((a, b) => {
+            let aCar = a.make;
+            let bCar = b.make;
+
+            if (aCar < bCar) {
+              return -1;
+            } else if (bCar < aCar) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        } else if (this.state.makeSort[0] === "descending") {
+          return cars.sort((a, b) => {
+            let aCar = a.make;
+            let bCar = b.make;
+
+            if (aCar > bCar) {
+              return -1;
+            } else if (bCar > aCar) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        }
+        break;
+      case "model":
+        if (this.state.modelSort[0] === "ascending") {
+          return cars.sort((a, b) => {
+            let aCar = a.model;
+            let bCar = b.model;
+
+            if (aCar < bCar) {
+              return -1;
+            } else if (bCar < aCar) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        } else if (this.state.modelSort[0] === "descending") {
+          return cars.sort((a, b) => {
+            let aCar = a.model;
+            let bCar = b.model;
+
+            if (aCar > bCar) {
+              return -1;
+            } else if (bCar > aCar) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        }
+        break;
+      default:
         return cars.sort((a, b) => {
-          let aCar = a.make;
-          let bCar = b.make;
+          let aCar = a.id;
+          let bCar = b.id;
 
           if (aCar < bCar) {
             return -1;
-          } else if (bCar < aCar) {
+          } else if (aCar > bCar) {
             return 1;
           } else {
             return 0;
           }
         });
-      } else if (this.state.makeSort[0] === "descending") {
-        return cars.sort((a, b) => {
-          let aCar = a.make;
-          let bCar = b.make;
-
-          if (aCar > bCar) {
-            return -1;
-          } else if (bCar > aCar) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      } else {
-        return cars.sort((a, b) => {
-          let aCar = a.make;
-          let bCar = b.make;
-
-          if (aCar < bCar) {
-            return -1;
-          } else if (bCar < aCar) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      }
-    } else if (field === "model") {
-      if (this.state.modelSort[0] === "ascending") {
-        return cars.sort((a, b) => {
-          let aCar = a.model;
-          let bCar = b.model;
-
-          if (aCar < bCar) {
-            return -1;
-          } else if (bCar < aCar) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      } else if (this.state.modelSort[0] === "descending") {
-        return cars.sort((a, b) => {
-          let aCar = a.model;
-          let bCar = b.model;
-
-          if (aCar > bCar) {
-            return -1;
-          } else if (bCar > aCar) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      } else {
-        return cars.sort((a, b) => {
-          let aCar = a.model;
-          let bCar = b.model;
-
-          if (aCar < bCar) {
-            return -1;
-          } else if (bCar < aCar) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      }
     }
   }
 
