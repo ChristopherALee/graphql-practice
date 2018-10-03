@@ -66,7 +66,7 @@ class BookList extends React.Component {
       return <div>Loading books...</div>;
     } else {
       let sortedBooks = this.sortBooksBy(this.state.sortBy, data.books);
-      debugger;
+
       if (this.state.deleteMode) {
         return sortedBooks.map((book, idx) => {
           return <EditBook key={book.id} book={book} />;
@@ -102,12 +102,13 @@ class BookList extends React.Component {
             if (!sortedState[0]) {
               this.setState({ sortBy: null });
             }
-            debugger;
+
             this.setState({
               nameSort: sortedState,
               authorSort: [null, "ascending", "descending"],
               genreSort: [null, "ascending", "descending"]
             });
+
             break;
           case "author":
             pivotEl = this.state.authorSort[0];
@@ -123,6 +124,7 @@ class BookList extends React.Component {
               authorSort: sortedState,
               genreSort: [null, "ascending", "descending"]
             });
+
             break;
           case "genre":
             pivotEl = this.state.genreSort[0];
@@ -138,6 +140,7 @@ class BookList extends React.Component {
               authorSort: [null, "ascending", "descending"],
               genreSort: sortedState
             });
+
             break;
           default:
             break;
@@ -150,7 +153,6 @@ class BookList extends React.Component {
     switch (field) {
       case "name":
         if (this.state.nameSort[0] === "ascending") {
-          debugger;
           return books.sort((a, b) => {
             let aBook = a.name;
             let bBook = b.name;
@@ -177,6 +179,68 @@ class BookList extends React.Component {
             }
           });
         }
+
+        break;
+      case "author":
+        if (this.state.authorSort[0] === "ascending") {
+          return books.sort((a, b) => {
+            let aBook = a.author;
+            let bBook = b.author;
+
+            if (aBook < bBook) {
+              return -1;
+            } else if (bBook < aBook) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        } else if (this.state.authorSort[0] === "descending") {
+          return books.sort((a, b) => {
+            let aBook = a.author;
+            let bBook = b.author;
+
+            if (aBook > bBook) {
+              return -1;
+            } else if (bBook > aBook) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        }
+
+        break;
+      case "genre":
+        if (this.state.genreSort[0] === "ascending") {
+          return books.sort((a, b) => {
+            let aBook = a.genre;
+            let bBook = b.genre;
+
+            if (aBook < bBook) {
+              return -1;
+            } else if (bBook < aBook) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        } else if (this.state.genreSort[0] === "descending") {
+          return books.sort((a, b) => {
+            let aBook = a.genre;
+            let bBook = b.genre;
+
+            if (aBook > bBook) {
+              return -1;
+            } else if (bBook > aBook) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        }
+
+        break;
       default:
         return books.sort((a, b) => {
           let aBook = a.id;
@@ -198,6 +262,18 @@ class BookList extends React.Component {
       if (this.state.nameSort[0] === "ascending") {
         return <div id="ascending-arrow" />;
       } else if (this.state.nameSort[0] === "descending") {
+        return <div id="descending-arrow" />;
+      }
+    } else if (field === "author" && this.state.sortBy === "author") {
+      if (this.state.authorSort[0] === "ascending") {
+        return <div id="ascending-arrow" />;
+      } else if (this.state.authorSort[0] === "descending") {
+        return <div id="descending-arrow" />;
+      }
+    } else if (field === "genre" && this.state.sortBy === "genre") {
+      if (this.state.genreSort[0] === "ascending") {
+        return <div id="ascending-arrow" />;
+      } else if (this.state.genreSort[0] === "descending") {
         return <div id="descending-arrow" />;
       }
     }
@@ -230,9 +306,19 @@ class BookList extends React.Component {
             <p>Name {this.sortIcon("name")}</p>
           </th>
 
-          <th>Author</th>
+          <th
+            className={this.columnHeaderClassNameToggle()}
+            onClick={this.sortBy("author")}
+          >
+            <p>Author {this.sortIcon("author")}</p>
+          </th>
 
-          <th>Genre</th>
+          <th
+            className={this.columnHeaderClassNameToggle()}
+            onClick={this.sortBy("genre")}
+          >
+            <p>Genre {this.sortIcon("genre")}</p>
+          </th>
 
           {this.displayBooks()}
 
