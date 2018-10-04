@@ -41,9 +41,7 @@ class AddCar extends React.Component {
         ]
       })
       .then(() => {
-        this.setState({
-          model: ""
-        });
+        this.setState({ model: "" });
       });
   }
 

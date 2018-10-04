@@ -73,13 +73,9 @@ class CarList extends React.Component {
 
   toggleDeleteMode() {
     if (this.state.deleteMode) {
-      this.setState({
-        deleteMode: false
-      });
+      this.setState({ deleteMode: false });
     } else {
-      this.setState({
-        deleteMode: true
-      });
+      this.setState({ deleteMode: true });
     }
   }
 
@@ -206,6 +202,7 @@ class CarList extends React.Component {
             }
           });
         }
+
         break;
       case "model":
         if (this.state.modelSort[0] === "ascending") {
@@ -235,6 +232,7 @@ class CarList extends React.Component {
             }
           });
         }
+
         break;
       default:
         return cars.sort((a, b) => {

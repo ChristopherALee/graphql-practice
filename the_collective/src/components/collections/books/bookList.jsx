@@ -25,13 +25,9 @@ class BookList extends React.Component {
 
   toggleDeleteMode() {
     if (this.state.deleteMode) {
-      this.setState({
-        deleteMode: false
-      });
+      this.setState({ deleteMode: false });
     } else {
-      this.setState({
-        deleteMode: true
-      });
+      this.setState({ deleteMode: true });
     }
   }
 
