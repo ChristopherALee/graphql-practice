@@ -5,7 +5,8 @@ const gameSchema = new Schema({
   name: String,
   genre: String,
   platform: String,
-  numOfPlayers: String
+  numOfPlayers: String,
+  rating: String
 });
 
 module.exports = mongoose.model("Game", gameSchema);

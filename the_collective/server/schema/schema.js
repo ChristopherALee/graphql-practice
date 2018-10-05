@@ -43,7 +43,8 @@ const GameType = new GraphQLObjectType({
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
     platform: { type: GraphQLString },
-    numOfPlayers: { type: GraphQLString }
+    numOfPlayers: { type: GraphQLString },
+    rating: { type: GraphQLString }
   })
 });
 
