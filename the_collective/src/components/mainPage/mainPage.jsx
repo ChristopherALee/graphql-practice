@@ -6,6 +6,7 @@ import "./mainPage.css";
 import NavBar from "../navbar/navBar";
 import BookList from "../collections/books/bookList";
 import CarList from "../collections/cars/carList";
+import Games from "../collections/games/games";
 
 export default class MainPage extends React.Component {
   constructor(props) {
@@ -31,8 +32,9 @@ export default class MainPage extends React.Component {
         <Route path="/" component={NavBar} />
 
         <Switch>
-          <Route path="/books" component={BookList} />
-          <Route path="/cars" component={CarList} />
+          <Route exact path="/books" component={BookList} />
+          <Route exact path="/cars" component={CarList} />
+          <Route path="/games" component={Games} />
         </Switch>
       </main>
     );

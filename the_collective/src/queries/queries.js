@@ -84,6 +84,18 @@ const deleteCarMutation = gql`
   }
 `;
 
+const getGamesQuery = gql`
+  {
+    games {
+      name
+      genre
+      platform
+      numOfPlayers
+      rating
+    }
+  }
+`;
+
 export {
   getBooksQuery,
   addBookMutation,
@@ -92,5 +104,6 @@ export {
   getCarsQuery,
   addCarMutation,
   editCarMutation,
-  deleteCarMutation
+  deleteCarMutation,
+  getGamesQuery
 };
